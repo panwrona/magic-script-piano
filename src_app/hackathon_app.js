@@ -3,6 +3,13 @@ import { View, Text, Button } from 'magic-script-components';
 
 class HackathonApp extends React.Component {
 
+  constructor(props) {
+		super(props);
+	
+    this.state = {action_a3: "stop", playAudio: false }
+	}
+
+
   renderNormalKey({
     localPosition = [0, 0, 0],
     title,
@@ -12,7 +19,7 @@ class HackathonApp extends React.Component {
     textSize = 0.03,
     width = 0.05,
     height = 0.3,
-    onClick = () => { },
+    onClick = () => {     this.setState({ playAudio: true });  },
   }) {
     return (
       <view>
@@ -70,7 +77,17 @@ class HackathonApp extends React.Component {
   }
 
   onButtonClick(param) {
-    return () => {  };
+    return () => { 
+        <audio 
+          fileName={require('../resources/a3.mp3')} 
+          action={'start'} 
+          soundLooping={false} 
+          soundMute={false}
+          soundVolumeLinear={4.0} 
+          spatialSoundEnable={false} 
+          spatialSoundPosition={{ 'channel': 0, channelPosition: [0,0,0] }}
+          />
+     };
   }
 
 
@@ -89,6 +106,17 @@ class HackathonApp extends React.Component {
         {this.renderNormalKey({ localPosition: [0.240, 0, 0], title: 'A', onClick: this.onButtonClick({ title: 'A' }) })}
         {this.renderSpecialKey({ localPosition: [0.264, 0.075, 0], title: '', onClick: this.onButtonClick({ title: '' }) })}
         {this.renderNormalKey({ localPosition: [0.288, 0, 0], title: 'H', onClick: this.onButtonClick({ title: 'H' }) })}
+        {playAudio && ( 
+          <audio 
+          fileName={require('../resources/a3.mp3')} 
+          action={'start'} 
+          soundLooping={false} 
+          soundMute={false}
+          soundVolumeLinear={4.0} 
+          spatialSoundEnable={false} 
+          spatialSoundPosition={{ 'channel': 0, channelPosition: [0,0,0] }}
+          />
+        ) }
       </View>
     );
   }
