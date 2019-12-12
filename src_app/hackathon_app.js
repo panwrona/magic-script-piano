@@ -1,3 +1,4 @@
+'use strict';
 import React from 'react';
 import { View, Text, Button } from 'magic-script-components';
 
@@ -99,7 +100,7 @@ class HackathonApp extends React.Component {
     const objects = []
     for (const [octaveIndex, octave] of octaves.entries()) {
       for (const [toneIndex, tone] of tones.entries()) {
-        x = 7 * octaveIndex * 0.048 + toneIndex * 0.048
+        var x = 7 * octaveIndex * 0.048 + toneIndex * 0.048
         objects.push(
           this.renderNormalKey(
             {
@@ -111,7 +112,7 @@ class HackathonApp extends React.Component {
         )
       }
       for (const [semiToneIndex, semiTone] of semi_tones.entries()) {
-        multiplier = 0
+        let multiplier = 0
         if (semiTone == 'db') {
           multiplier = 0
         } else if (semiTone == 'eb') {
